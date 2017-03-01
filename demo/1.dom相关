@@ -1,0 +1,47 @@
+(2)
+// 不好的做法
+for (var i=0; i < items.length; i++){
+    var item = document.createElement("li");
+    item.appendChild(document.createTextNode("Option " + i);
+    list.appendChild(item);
+}   
+// 更好的做法
+// 使用容器存放临时变更， 最后再一次性更新DOM
+var fragment = document.createDocumentFragment();
+for (var i=0; i < items.length; i++){
+    var item = document.createElement("li");
+    item.appendChild(document.createTextNode("Option " + i);
+    fragment.appendChild(item);
+}
+list.appendChild(fragment);
+
+(3)
+list.style.display = "none";  
+for (var i=0; i < items.length; i++){  
+    var item = document.createElement("li");  
+    item.appendChild(document.createTextNode("Option " + i);  
+    list.appendChild(item);  
+}  
+list.style.display = "";  
+
+(4)
+// 不好的做法
+// 这种做法会触发多次重排
+element.style.backgroundColor = "blue";  
+element.style.color = "red";  
+element.style.fontSize = "12em";
+// 更好的做法是，把样式都放在一个class下
+.newStyle {  
+    background-color: blue;  
+    color: red;  
+    font-size: 12em;  
+}  
+element.className = "newStyle";
+
+(5)
+// 不好的做法
+document.getElementById("myDiv").style.left = document.getElementById("myDiv").offsetLeft +  
+document.getElementById("myDiv").offsetWidth + "px";  
+// 更好的做法
+var myDiv = document.getElementById("myDiv");  
+myDiv.style.left = myDiv.offsetLeft + myDiv.offsetWidth + "px";  
